@@ -13,9 +13,10 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 8.0.0
 Config/testthat/edition: 3
 Imports:
-    tibble
-Suggests:
     dplyr,
+    tibble,
+    utils
+Suggests:
     secfilings (>= 1.1.0),
     testthat (>= 3.0.0),
     withr
