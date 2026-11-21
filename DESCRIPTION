@@ -1,0 +1,21 @@
+Package: companyresearch
+Title: Public Company Research in Depth
+Version: 0.0.0.9000
+Authors@R: 
+    person("Joseph", "Bennett", , "jbennett@jbennettconsulting.com", role = c("aut", "cre"))
+Description: A research tool for studying one public company in depth. Given a
+    ticker, it builds a long history of the company's fundamentals from SEC
+    data, turns that history into financial health and valuation measures, and
+    presents the result as a one-page tearsheet.
+License: MIT + file LICENSE
+Encoding: UTF-8
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 8.0.0
+Config/testthat/edition: 3
+Imports:
+    tibble
+Suggests:
+    dplyr,
+    secfilings (>= 1.1.0),
+    testthat (>= 3.0.0),
+    withr
