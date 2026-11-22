@@ -1,14 +1,39 @@
 #' Default map from metrics to us-gaap tags, in priority order
 #'
-#' For each period, a metric takes the highest-priority tag with a value. Debt
-#' is split into current and noncurrent because few filers tag a quarterly
-#' total. Equity falls back to the tag including noncontrolling interest
-#' (always, for AT&T), which understates return on equity.
+#' Lists the metrics [company_history()] builds and the companyfacts tags each
+#' one can come from. For each period, a metric takes the highest-priority tag
+#' with a value, so a company that switches tags keeps a continuous history.
 #'
-#' Additive marks flow metrics whose quarters can be derived by subtracting
-#' year-to-date values; per-share and average-share metrics are not additive.
+#' Debt is split into current and noncurrent because few filers tag a total.
+#' Equity falls back to the tag including noncontrolling interest (always, for
+#' AT&T), which understates return on equity.
 #'
-#' @noRd
+#' To cover a company the default misses, pass a modified copy to the `map`
+#' argument of [company_history()]. Each metric must keep a single
+#' `period_type`, `unit` and `additive` value, and a tag may appear under only
+#' one metric.
+#'
+#' @return A tibble with one row per metric and candidate tag:
+#'   \describe{
+#'     \item{metric}{Metric name, e.g. `"revenue"`.}
+#'     \item{taxonomy}{Taxonomy of the tag; currently always `"us-gaap"`.}
+#'     \item{tag}{companyfacts tag name.}
+#'     \item{priority}{Integer, 1 = preferred; used per period.}
+#'     \item{period_type}{`"duration"` (flows, e.g. revenue) or `"instant"`
+#'       (balance-sheet values, e.g. total assets).}
+#'     \item{unit}{companyfacts unit: `"USD"`, `"USD/shares"` or `"shares"`.}
+#'     \item{additive}{`TRUE` for flow metrics whose quarters can be derived by
+#'       subtracting year-to-date values; `FALSE` for per-share, average-share
+#'       and instant metrics.}
+#'   }
+#'
+#' @examples
+#' m <- metric_map()
+#' # add a tag for a company that reports revenue under a different name
+#' m <- dplyr::add_row(m, metric = "revenue", taxonomy = "us-gaap",
+#'                     tag = "RevenuesNetOfInterestExpense", priority = 4L,
+#'                     period_type = "duration", unit = "USD", additive = TRUE)
+#' @export
 metric_map <- function() {
     tibble::tribble(
         ~metric, ~taxonomy, ~tag, ~priority, ~period_type, ~unit, ~additive,

@@ -15,8 +15,8 @@ Config/testthat/edition: 3
 Imports:
     dplyr,
     tibble,
+    secfilings (>= 1.1.0),
     utils
 Suggests:
-    secfilings (>= 1.1.0),
     testthat (>= 3.0.0),
     withr
