@@ -20,3 +20,25 @@ make_facts <- function() {
     ) |>
     dplyr::select(taxonomy, tag, unit, start, end, val, accn, fy, fp, form, filed, frame)
 }
+
+make_resolved <- function() {
+    tibble::tribble(
+        ~metric, ~tag, ~start, ~end, ~val, ~accn, ~form, ~filed,
+        "revenue", "Revenues", "2025-01-01", "2025-03-31", 100, "A", "10-Q", "2025-05-01",
+        "revenue", "Revenues", "2025-01-01", "2025-06-30", 212, "B", "10-Q", "2025-08-01",
+        "revenue", "Revenues", "2025-04-01", "2025-06-30", 110, "B", "10-Q", "2025-08-01",
+        "revenue", "Revenues", "2025-01-01", "2025-09-30", 330, "C", "10-Q", "2025-11-01",
+        "revenue", "Revenues", "2025-01-01", "2025-12-31", 460, "D", "10-K", "2026-02-15",
+        "revenue", "Revenues", "2023-09-01", "2023-12-31", 40,  "E", "10-K", "2024-02-15",
+        "interest_expense", "InterestExpense", "2024-01-01", "2024-03-31", 50, "F", "10-Q", "2024-05-01",
+        "interest_expense", "InterestExpense", "2024-01-01", "2024-09-30", 160, "G", "10-Q", "2024-11-01",
+        "interest_expense", "InterestExpense", "2024-01-01", "2024-12-31", 220, "H", "10-K", "2025-02-15",
+        "eps_diluted", "EarningsPerShareDiluted", "2025-01-01", "2025-03-31", 0.5, "A", "10-Q", "2025-05-01",
+        "eps_diluted", "EarningsPerShareDiluted", "2025-01-01", "2025-06-30", 1.1, "B", "10-Q", "2025-08-01",
+        "eps_diluted", "EarningsPerShareDiluted", "2025-01-01", "2025-12-31", 2.3, "D", "10-K", "2026-02-15",
+        "total_assets", "Assets", NA_character_, "2025-12-31", 5000, "D", "10-K", "2026-02-15"
+    ) |>
+    dplyr::mutate(
+        start = as.Date(start), end = as.Date(end), filed = as.Date(filed),
+        first_filed = filed)
+}
