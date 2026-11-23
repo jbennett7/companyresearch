@@ -42,3 +42,28 @@ make_resolved <- function() {
         start = as.Date(start), end = as.Date(end), filed = as.Date(filed),
         first_filed = filed)
 }
+
+make_history <- function() {
+    tibble::tribble(
+        ~metric,                    ~period,    ~start,       ~end,         ~val,  ~filed,       ~tag,                           ~source,    ~first_filed,
+        "operating_cash_flow",       "Q",       "2025-01-01", "2025-03-31", 300,   "2025-05-01", "NetCashProvidedByUsedInOperatingActivities",            "reported", "2025-05-01",
+        "capex",                     "Q",       "2025-01-01", "2025-03-31", 100,   "2025-05-01", "PaymentsToAcquirePropertyPlantAndEquipment", "reported", "2025-05-01",
+        "operating_income",          "Q",       "2025-01-01", "2025-03-31", 200,   "2025-05-01", "OperatingIncomeLoss",              "reported", "2025-05-01",
+        "operating_income",          "Q",       "2025-04-01", "2025-06-30", 210,   "2025-08-01", "OperatingIncomeLoss",              "reported", "2025-08-01",
+        "depreciation_amortization", "Q",       "2025-01-01", "2025-03-31", 50,    "2025-05-10", "DepreciationDepletionAndAmortization",  "reported", "2025-05-10",
+        "operating_cash_flow",       "Q",       "2025-10-01", "2025-12-31", 350,   "2026-02-15", "NetCashProvidedByUsedInOperatingActivities",            "reported", "2026-02-15",
+        "capex",                     "Q",       "2025-10-01", "2025-12-31", 120,   "2026-02-15", "PaymentsToAcquirePropertyPlantAndEquipment", "reported", "2026-02-15",
+        "operating_cash_flow",       "FY",      "2025-01-01", "2025-12-31", 1200,  "2026-02-15", "NetCashProvidedByUsedInOperatingActivities",            "reported", "2026-02-15",
+        "capex",                     "FY",      "2025-01-01", "2025-12-31", 450,   "2026-02-15", "PaymentsToAcquirePropertyPlantAndEquipment", "reported", "2026-02-15",
+        "operating_income",          "FY",      "2025-01-01", "2025-12-31", 800,   "2026-02-15", "OperatingIncomeLoss",              "reported", "2026-02-15",
+        "depreciation_amortization", "FY",      "2025-01-01", "2025-12-31", 210,   "2026-02-15", "DepreciationDepletionAndAmortization",  "reported", "2026-02-15",
+        "capex",                     "Q",       "2025-04-01", "2025-06-30", 110,   "2025-08-01", "PaymentsToAcquirePropertyPlantAndEquipment",    "reported", "2025-08-01",
+        "debt_noncurrent",           "instant", NA_character_, "2025-09-30", 880,  "2025-11-01", "LongTermDebtAndCapitalLeaseObligations",   "reported", "2025-11-01",
+        "debt_current",              "instant", NA_character_, "2025-12-31", 100,  "2026-02-15", "DebtCurrent",           "reported", "2026-02-15",
+        "debt_noncurrent",           "instant", NA_character_, "2025-12-31", 900,  "2026-02-15", "LongTermDebtAndCapitalLeaseObligations",   "reported", "2026-02-15",
+        "cash",                      "instant", NA_character_, "2025-12-31", 150,  "2026-02-15", "CashAndCashEquivalentsAtCarryingValue", "reported", "2026-02-15"
+    ) |>
+    dplyr::mutate(start = as.Date(start), end = as.Date(end),
+                  filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
+    dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
+}
