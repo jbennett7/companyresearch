@@ -91,3 +91,29 @@ make_quarters <- function() {
                   filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
     dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
 }
+
+make_ratio_history <- function() {
+    tibble::tribble(
+        ~metric, ~period, ~start, ~end, ~val, ~tag, ~source, ~filed, ~first_filed,
+        "revenue", "FY", "2025-01-01", "2025-12-31", 1000, "Revenues", "reported", "2026-02-15", "2026-02-15",
+        "operating_income", "FY", "2025-01-01", "2025-12-31", 200, "OperatingIncome", "reported", "2026-02-15", "2026-02-15",
+        "net_income", "FY", "2025-01-01", "2025-12-31", 120, "NetIncomeLoss", "reported", "2026-02-15", "2026-02-15",
+        "income_tax", "FY", "2025-01-01", "2025-12-31", 30, "IncomeTax", "reported", "2026-02-15", "2026-02-15",
+        "interest_expense", "FY", "2025-01-01", "2025-12-31", 40, "InterestExpense", "reported", "2026-02-15", "2026-02-15",
+        "depreciation_amortization", "FY", "2025-01-01", "2025-12-31", 50, "DepreciationAndAmortization", "reported", "2026-02-15", "2026-02-15",
+        "operating_cash_flow", "FY", "2025-01-01", "2025-12-31", 300, "OperatingCashFlow", "reported", "2026-02-15", "2026-02-15",
+        "capex", "FY", "2025-01-01", "2025-12-31", 100, "PaymentsToAcquirePropertyPlantAndEquipment", "reported", "2026-02-15", "2026-02-15",
+        "dividends_paid", "FY", "2025-01-01", "2025-12-31", 80, "DividendsPaid", "reported", "2026-02-15", "2026-02-15",
+        "cash", "instant", NA_character_, "2025-12-31", 200, "CashAndCashEquivalent", "reported", "2026-02-15", "2026-02-15",
+        "equity", "instant", NA_character_, "2025-12-31", 500, "Equity", "reported", "2026-03-01", "2026-02-15",
+        "debt_current", "instant", NA_character_, "2025-12-31", 100, "DebtCurrent", "reported", "2026-02-15", "2026-02-15",
+        "debt_noncurrent", "instant", NA_character_, "2025-12-31", 400, "DebtNoncurrent", "reported", "2026-02-15", "2026-02-15",
+        "revenue", "Q", "2025-10-01", "2025-12-31", 260, "Revenues", "reported", "2026-02-15", "2026-02-15",
+        "operating_income", "Q", "2025-10-01", "2025-12-31", 52, "OperatingIncomeLoss", "reported", "2026-02-15", "2026-02-15",
+        "net_income", "Q", "2025-10-01", "2025-12-31", 26, "NetIncomeLoss", "reported", "2026-02-15", "2026-02-15",
+        "interest_expense", "Q", "2025-10-01", "2025-12-31", 0, "InterestExpense", "reported", "2026-02-15", "2026-02-15"
+    ) |>
+    dplyr::mutate(start = as.Date(start), end = as.Date(end),
+                  filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
+    dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
+}

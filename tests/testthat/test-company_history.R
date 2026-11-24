@@ -43,7 +43,7 @@ test_that("company_history live AT&T test", {
     skip_if_offline("www.sec.gov");
     ua <- Sys.getenv("SEC_USERAGENT")
     skip_if(ua == "", "SEC_USERAGENT not set")
-    h <- company_history("732717", ua, withr::local_tempdir())
+    h <- suppressMessages(company_history("732717", ua, withr::local_tempdir()))
     q <- dplyr::filter(h, metric == "interest_expense", period == "Q",
                        end >= as.Date("2023-03-31"), end <= as.Date("2023-12-31"))
     expect_equal(q$val, c(1708, 1608, 1662, 1726) * 1e6)

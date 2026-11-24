@@ -8,4 +8,4 @@ utils::globalVariables(c("metric", "start", "end", "filed", "priority",
                          "prev_end", "prev_val", "n_q", "n_fy", "n_instant",
                          "n_derived", "missing_q", "val_a", "val_b", "filed_a",
                          "filed_b", "first_filed_a", "first_filed_b", "contig",
-                         "ok"))
+                         "ok", "period_a", "start_a", "ratio"))
