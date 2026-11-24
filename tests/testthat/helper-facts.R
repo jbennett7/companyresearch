@@ -67,3 +67,27 @@ make_history <- function() {
                   filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
     dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
 }
+
+make_quarters <- function() {
+    tibble::tribble(
+        ~metric, ~period, ~start, ~end, ~val, ~filed, ~tag, ~source, ~first_filed,
+        "revenue", "Q", "2024-10-01", "2024-12-31", 90, "2025-02-15", "Revenues", "reported", "2025-02-15",
+        "revenue", "Q", "2025-01-01", "2025-03-31", 100, "2026-02-15", "Revenues", "reported", "2025-05-01",
+        "revenue", "Q", "2025-04-01", "2025-06-30", 110, "2025-08-01", "Revenues", "reported", "2025-08-01",
+        "revenue", "Q", "2025-07-01", "2025-09-30", 120, "2025-11-01", "Revenues", "reported", "2025-11-01",
+        "revenue", "Q", "2025-10-01", "2025-12-31", 130, "2026-02-15", "Revenues", "reported", "2026-02-15",
+        "revenue", "FY", "2025-01-01", "2025-12-31", 460, "2026-02-15", "Revenues", "reported", "2026-02-15",
+        "interest_expense", "Q", "2024-01-01", "2024-03-31", 10, "2024-05-01", "InterestExpense", "reported", "2024-05-01",
+        "interest_expense", "Q", "2024-04-01", "2024-06-30", 11, "2024-08-01", "InterestExpense", "reported", "2024-08-01",
+        "interest_expense", "Q", "2024-10-01", "2024-12-31", 13, "2025-02-15", "InterestExpense", "reported", "2025-02-15",
+        "interest_expense", "Q", "2025-01-01", "2025-03-31", 14, "2025-05-01", "InterestExpense", "reported", "2025-05-01",
+        "eps_diluted", "Q", "2025-01-01", "2025-03-31", 0.5, "2025-05-01", "EarningsPerShareDiluted", "reported", "2025-05-01",
+        "eps_diluted", "Q", "2025-04-01", "2025-06-30", 0.6, "2025-08-01", "EarningsPerShareDiluted", "reported", "2025-11-01",
+        "eps_diluted", "Q", "2025-07-01", "2025-09-30", 0.6, "2025-11-01", "EarningsPerShareDiluted", "reported", "2025-11-01",
+        "eps_diluted", "Q", "2025-10-01", "2025-12-31", 0.6, "2026-02-15", "EarningsPerShareDiluted", "reported", "2026-02-15",
+        "total_assets", "instant", NA_character_, "2025-12-31", 5000, "2026-02-15", "Assets", "reported", "2026-02-15"
+    ) |>
+    dplyr::mutate(start = as.Date(start), end = as.Date(end),
+                  filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
+    dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
+}
