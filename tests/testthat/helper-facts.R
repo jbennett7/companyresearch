@@ -117,3 +117,18 @@ make_ratio_history <- function() {
                   filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
     dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
 }
+
+make_market_history <- function() {
+    tibble::tribble(
+        ~metric, ~period, ~start, ~end, ~val, ~source, ~tag, ~filed, ~first_filed,
+        "shares_outstanding", "instant", NA_character_, "2024-01-20", 100, "reported", "EntityCommonStockSharesOutstanding", "2024-01-25", "2024-01-25",
+        "shares_outstanding", "instant", NA_character_, "2024-03-15", 210, "reported", "EntityCommonStockSharesOutstanding", "2024-04-05", "2024-04-05",
+        "net_debt", "instant", NA_character_, "2022-12-31", 999, "computed", NA_character_, "2024-02-10", "2024-02-10",
+        "net_debt", "instant", NA_character_, "2023-12-31", 500, "computed", NA_character_, "2024-02-10", "2024-02-10",
+        "revenue", "FY", "2023-01-01", "2023-12-31", 1e6, "reported", "Revenues", "2024-02-10", "2024-02-10"
+    ) |>
+    dplyr::mutate(start = as.Date(start), end = as.Date(end),
+                  filed = as.Date(filed), first_filed = as.Date(first_filed)) |>
+    dplyr::select(metric, period, start, end, val, source, tag, filed, first_filed)
+}
+

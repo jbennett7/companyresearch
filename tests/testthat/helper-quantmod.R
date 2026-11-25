@@ -29,3 +29,17 @@ make_splits <- function() {
 make_no_splits <- function() {
     xts::xts(numeric(0), order.by = as.Date(character(0)))
 }
+
+make_market_prices <- function() {
+    tibble::tribble(
+        ~date, ~close, ~split_factor,
+        "2023-12-29", 9, 0.5,
+        "2024-01-30", 9.5, 0.5,
+        "2024-01-31", 10, 0.5,
+        "2024-02-29", 11, 0.5,
+        "2024-03-01", 11.5, 1,
+        "2024-03-28", 12, 1,
+        "2024-04-30", 13, 1
+    ) |>
+    dplyr::mutate(date = as.Date(date))
+}
