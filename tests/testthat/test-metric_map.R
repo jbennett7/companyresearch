@@ -39,6 +39,10 @@ test_that("metric_map no tag under two metrics", {
     expect_identical(map$tag[duplicated(map$tag)], character(0))
 })
 
+test_that("metric_map only has known taxonomies", {
+    expect_in(metric_map()$taxonomy, c("us-gaap", "dei"))
+})
+
 test_that("metric_map tags exist in real data (AT&T)", {
     ua <- Sys.getenv("SEC_USERAGENT")
     skip_on_cran(); skip_if_offline("www.sec.gov"); skip_if(ua == "")

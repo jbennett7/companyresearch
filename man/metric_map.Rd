@@ -2,7 +2,9 @@
 % Please edit documentation in R/metric_map.R
 \name{metric_map}
 \alias{metric_map}
-\title{Default map from metrics to us-gaap tags, in priority order}
+\title{Default map from metrics to XBRL tags, in priority order
+\item{taxonomy}{Taxonomy of the tag: \code{"us-gaap"}, or \code{"dei"} for the
+cover-page share count.}}
 \usage{
 metric_map()
 }
@@ -30,6 +32,12 @@ with a value, so a company that switches tags keeps a continuous history.
 Debt is split into current and noncurrent because few filers tag a total.
 Equity falls back to the tag including noncontrolling interest (always, for
 AT&T), which understates return on equity.
+
+\code{shares_outstanding} is the share count from filing's cover page
+(\code{dei:EntityCommonStockSharesOutstanding}), as of a date shortly before
+filing. Companies with several share classes may report it only per class,
+and companyfacts has no class breakdown, so the metric can be missing for
+them; check with \code{\link[=history_coverage]{history_coverage()}}.
 
 To cover a company the default misses, pass a modified copy to the \code{map}
 argument of \code{\link[=company_history]{company_history()}}. Each metric must keep a single

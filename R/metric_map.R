@@ -1,4 +1,6 @@
-#' Default map from metrics to us-gaap tags, in priority order
+#' Default map from metrics to XBRL tags, in priority order
+#'     \item{taxonomy}{Taxonomy of the tag: `"us-gaap"`, or `"dei"` for the
+#'     cover-page share count.}
 #'
 #' Lists the metrics [company_history()] builds and the companyfacts tags each
 #' one can come from. For each period, a metric takes the highest-priority tag
@@ -7,6 +9,12 @@
 #' Debt is split into current and noncurrent because few filers tag a total.
 #' Equity falls back to the tag including noncontrolling interest (always, for
 #' AT&T), which understates return on equity.
+#'
+#' `shares_outstanding` is the share count from filing's cover page
+#' (`dei:EntityCommonStockSharesOutstanding`), as of a date shortly before
+#' filing. Companies with several share classes may report it only per class,
+#' and companyfacts has no class breakdown, so the metric can be missing for
+#' them; check with [history_coverage()].
 #'
 #' To cover a company the default misses, pass a modified copy to the `map`
 #' argument of [company_history()]. Each metric must keep a single
@@ -62,6 +70,7 @@ metric_map <- function() {
         "debt_current", "us-gaap",  "DebtCurrent", 1L, "instant", "USD", FALSE,
         "debt_current", "us-gaap",  "LongTermDebtCurrent", 2L, "instant", "USD", FALSE,
         "debt_noncurrent", "us-gaap",  "LongTermDebtAndCapitalLeaseObligations", 1L, "instant", "USD", FALSE,
-        "debt_noncurrent", "us-gaap",  "LongTermDebtNoncurrent", 2L, "instant", "USD", FALSE
+        "debt_noncurrent", "us-gaap",  "LongTermDebtNoncurrent", 2L, "instant", "USD", FALSE,
+        "shares_outstanding", "dei", "EntityCommonStockSharesOutstanding", 1L, "instant", "shares", FALSE
     )
 }
