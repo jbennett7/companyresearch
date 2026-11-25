@@ -1,6 +1,4 @@
 #' Default map from metrics to XBRL tags, in priority order
-#'     \item{taxonomy}{Taxonomy of the tag: `"us-gaap"`, or `"dei"` for the
-#'     cover-page share count.}
 #'
 #' Lists the metrics [company_history()] builds and the companyfacts tags each
 #' one can come from. For each period, a metric takes the highest-priority tag
@@ -24,7 +22,8 @@
 #' @return A tibble with one row per metric and candidate tag:
 #'   \describe{
 #'     \item{metric}{Metric name, e.g. `"revenue"`.}
-#'     \item{taxonomy}{Taxonomy of the tag; currently always `"us-gaap"`.}
+#'     \item{taxonomy}{Taxonomy of the tag: `"us-gaap"`, or `"dei"` for the
+#'         cover-page share count.}
 #'     \item{tag}{companyfacts tag name.}
 #'     \item{priority}{Integer, 1 = preferred; used per period.}
 #'     \item{period_type}{`"duration"` (flows, e.g. revenue) or `"instant"`
@@ -45,7 +44,6 @@
 metric_map <- function() {
     tibble::tribble(
         ~metric, ~taxonomy, ~tag, ~priority, ~period_type, ~unit, ~additive,
-        "shares_outstanding", "dei", "EntityCommonStockSharesOutstanding", 1L, "instant", "shares", FALSE,
         "revenue", "us-gaap",  "Revenues", 1L, "duration", "USD", TRUE,
         "revenue", "us-gaap",  "RevenueFromContractWithCustomerExcludingAssessedTax", 2L, "duration", "USD", TRUE,
         "revenue", "us-gaap",  "SalesRevenueNet", 3L, "duration", "USD", TRUE,

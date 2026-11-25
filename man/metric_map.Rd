@@ -2,9 +2,7 @@
 % Please edit documentation in R/metric_map.R
 \name{metric_map}
 \alias{metric_map}
-\title{Default map from metrics to XBRL tags, in priority order
-\item{taxonomy}{Taxonomy of the tag: \code{"us-gaap"}, or \code{"dei"} for the
-cover-page share count.}}
+\title{Default map from metrics to XBRL tags, in priority order}
 \usage{
 metric_map()
 }
@@ -12,7 +10,8 @@ metric_map()
 A tibble with one row per metric and candidate tag:
 \describe{
 \item{metric}{Metric name, e.g. \code{"revenue"}.}
-\item{taxonomy}{Taxonomy of the tag; currently always \code{"us-gaap"}.}
+\item{taxonomy}{Taxonomy of the tag: \code{"us-gaap"}, or \code{"dei"} for the
+cover-page share count.}
 \item{tag}{companyfacts tag name.}
 \item{priority}{Integer, 1 = preferred; used per period.}
 \item{period_type}{\code{"duration"} (flows, e.g. revenue) or \code{"instant"}
