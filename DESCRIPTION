@@ -16,7 +16,10 @@ Imports:
     dplyr,
     tibble,
     secfilings (>= 1.1.0),
-    utils
+    utils,
+    quantmod,
+    zoo
 Suggests:
     testthat (>= 3.0.0),
-    withr
+    withr,
+    xts

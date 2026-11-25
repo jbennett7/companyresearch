@@ -2,3 +2,4 @@
 ^LICENSE\.md$
 ^\.cache$
 ^xbrl\.Cache$
+^\.scratch$
