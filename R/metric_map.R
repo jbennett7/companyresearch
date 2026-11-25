@@ -37,6 +37,7 @@
 metric_map <- function() {
     tibble::tribble(
         ~metric, ~taxonomy, ~tag, ~priority, ~period_type, ~unit, ~additive,
+        "shares_outstanding", "dei", "EntityCommonStockSharesOutstanding", 1L, "instant", "shares", FALSE,
         "revenue", "us-gaap",  "Revenues", 1L, "duration", "USD", TRUE,
         "revenue", "us-gaap",  "RevenueFromContractWithCustomerExcludingAssessedTax", 2L, "duration", "USD", TRUE,
         "revenue", "us-gaap",  "SalesRevenueNet", 3L, "duration", "USD", TRUE,

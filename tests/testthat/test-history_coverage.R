@@ -3,7 +3,7 @@ test_that("history_coverage returns one row per map metric, in map order", {
         get_companyfacts = function(cik, useragent, cache, refresh) make_facts(),
         .package = "secfilings")
     h <- history_coverage(company_history("123", useragent = "ua"))
-    expect_identical(nrow(h), 16L)
+    expect_identical(nrow(h), 17L)
     expect_identical(
         vapply(h, function(x) class(x)[1], character(1)),
         c(metric = "character", n_q = "integer", n_fy = "integer", n_instant = "integer",

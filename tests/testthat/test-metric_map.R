@@ -42,7 +42,9 @@ test_that("metric_map no tag under two metrics", {
 test_that("metric_map tags exist in real data (AT&T)", {
     ua <- Sys.getenv("SEC_USERAGENT")
     skip_on_cran(); skip_if_offline("www.sec.gov"); skip_if(ua == "")
-    cf <- secfilings::get_companyfacts("732717", ua, withr::local_tempdir())
+    suppressMessages({
+        cf <- secfilings::get_companyfacts("732717", ua, withr::local_tempdir())
+    })
     not_used_by_att <- c("SalesRevenueNet", "DepreciationAndAmortization",
                          "StockholdersEquity")
     expected <- setdiff(metric_map()$tag, not_used_by_att)
