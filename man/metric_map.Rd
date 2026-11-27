@@ -31,8 +31,10 @@ with a value, so a company that switches tags keeps a continuous history.
 Debt is split into current and noncurrent because few filers tag a total.
 Equity falls back to the tag including noncontrolling interest (always, for
 AT&T), which understates return on equity.
+Cash falls back to the total including restricted cash, which slightly
+understates net debt (and so enterprise value).
 
-\code{shares_outstanding} is the share count from filing's cover page
+\code{shares_outstanding} is the share count from each filing's cover page
 (\code{dei:EntityCommonStockSharesOutstanding}), as of a date shortly before
 filing. Companies with several share classes may report it only per class,
 and companyfacts has no class breakdown, so the metric can be missing for
